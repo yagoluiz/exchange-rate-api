@@ -10,9 +10,8 @@ namespace Exchange.Rate.API.ViewModels.Response
         }
 
         /// <summary>
-        /// 
+        /// Total cost (rounded to 2 decimal places)
         /// </summary>
-        /// <value></value>
         public decimal TotalCost { get; }
     }
 }

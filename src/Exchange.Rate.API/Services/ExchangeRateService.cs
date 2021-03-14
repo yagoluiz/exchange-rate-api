@@ -31,7 +31,7 @@ namespace Exchange.Rate.API.Services
 
             if (foreignExchangeRate == null)
             {
-                _domainNotification.AddNotification("QuoteForeignCurrency", "Foreign Exchange Rates API not found");
+                _domainNotification.AddNotification("QuoteForeignCurrency", "Foreign Exchange Rates API request error");
 
                 return null;
             }
@@ -48,7 +48,7 @@ namespace Exchange.Rate.API.Services
 
             if (foreignExchangeRate == null)
             {
-                _domainNotification.AddNotification("ForeignCurrencyConversion", "Foreign Exchange Rates API not found");
+                _domainNotification.AddNotification("ForeignCurrencyConversion", "Foreign Exchange Rates API request error");
 
                 return null;
             }

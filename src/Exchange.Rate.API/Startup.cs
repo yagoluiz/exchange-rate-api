@@ -1,6 +1,11 @@
 using System;
+using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Net.Http.Headers;
+using System.Reflection;
+using Exchange.Rate.API.Filters;
+using Exchange.Rate.API.Middlewares;
 using Exchange.Rate.API.Services;
 using Exchange.Rate.API.Services.Interfaces;
 using Exchange.Rate.Domain.Contracts;
@@ -10,6 +15,8 @@ using Exchange.Rate.Domain.Notifications;
 using Exchange.Rate.Infra.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,12 +34,31 @@ namespace Exchange.Rate.API
 
         public IConfiguration Configuration { get; }
 
+        [Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen(c =>
+            services.AddMvc(options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Exchange Rates API", Version = "v1" });
+                options.Filters.Add<DomainNotificationFilter>();
+            });
+            services.AddResponseCompression();
+            services.Configure<GzipCompressionProviderOptions>(options =>
+            {
+                options.Level = CompressionLevel.Fastest;
+            });
+            services.Configure<KestrelServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
+            services.AddSwaggerGen(options =>
+            {
+                options.SchemaFilter<OpenApiShemaFilter>();
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Exchange Rates API", Version = "v1" });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
             });
 
             AddSettings(services);
@@ -45,12 +71,16 @@ namespace Exchange.Rate.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1"));
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1"));
+            app.UseResponseCompression();
             app.UseRouting();
-            app.UseAuthorization();
+            app.UseExceptionHandler(new ExceptionHandlerOptions
+            {
+                ExceptionHandler = new ErrorHandlerMiddleware(env).Invoke
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
