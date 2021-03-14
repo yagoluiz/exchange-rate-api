@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  exchange-rate-api:
+    container_name: exchange-rate-api
+    image: exchange-rate-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '5000:80'
+    networks:
+      - exchange-rate-network
+  
+networks:
+  exchange-rate-network:
+    name: exchange-rate-network
+    driver: bridge

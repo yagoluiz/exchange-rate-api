@@ -15,7 +15,7 @@
       "command": "dotnet",
       "type": "process",
       "args": [
-          "restore"
+        "restore"
       ],
       "problemMatcher": "$msCompile"
     },
@@ -88,8 +88,8 @@
       "command": "dotnet",
       "type": "process",
       "args": [
-          "test",
-          "${workspaceFolder}/test/Exchange.Rate.Unit.Tests/Exchange.Rate.Unit.Tests.csproj"
+        "test",
+        "${workspaceFolder}/test/Exchange.Rate.Unit.Tests/Exchange.Rate.Unit.Tests.csproj"
       ],
       "problemMatcher": "$msCompile",
       "group": {
@@ -112,6 +112,33 @@
       "group": {
         "kind": "test",
         "isDefault": true
+      }
+    },
+    {
+      "type": "docker-build",
+      "label": "docker-build: release",
+      "dependsOn": [
+        "build"
+      ],
+      "dockerBuild": {
+        "tag": "exchange-rate-api:latest",
+        "dockerfile": "${workspaceFolder}/Dockerfile",
+        "context": "${workspaceFolder}",
+        "pull": true
+      },
+      "netCore": {
+        "appProject": "${workspaceFolder}/src/Exchange.Rate.API/Exchange.Rate.API.csproj"
+      }
+    },
+    {
+      "type": "docker-run",
+      "label": "docker-run: release",
+      "dependsOn": [
+        "docker-build: release"
+      ],
+      "dockerRun": {},
+      "netCore": {
+        "appProject": "${workspaceFolder}/src/Exchange.Rate.API/Exchange.Rate.API.csproj"
       }
     }
   ]

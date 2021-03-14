@@ -15,13 +15,13 @@
         "enabled": true,
         "args": "${auto-detect-url}/swagger",
         "windows": {
-            "command": "cmd.exe",
+          "command": "cmd.exe"
         },
         "osx": {
-            "command": "open",
+          "command": "open"
         },
         "linux": {
-            "command": "xdg-open",
+          "command": "xdg-open"
         }
       },
       "serverReadyAction": {
