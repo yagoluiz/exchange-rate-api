@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
@@ -25,6 +26,7 @@ using Polly;
 
 namespace Exchange.Rate.API
 {
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -34,7 +36,6 @@ namespace Exchange.Rate.API
 
         public IConfiguration Configuration { get; }
 
-        [Obsolete]
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();

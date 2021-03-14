@@ -5,7 +5,7 @@ using Exchange.Rate.API.ViewModels.Response;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Exchange.Rate.API.Controller
+namespace Exchange.Rate.API.Controller.v1
 {
     [ApiController]
     [Produces("application/json")]

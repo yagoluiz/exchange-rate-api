@@ -7,16 +7,16 @@ using Xunit;
 
 namespace Exchange.Rate.Integration.Tests
 {
-    [TraitAttribute("Foreign Exchange Rates", "Integration tests for Foreign Exchange Rates API resource")]
+    [TraitAttribute("External Foreign Exchange Rates", "Integration tests for external Foreign Exchange Rates API")]
     public class ForeignExchangeRatesServiceTest
     {
         [Fact(DisplayName = "GET /latest Returns http status code 200")]
-        public async Task GetLatestExchangeRatesAsyncWhenStatusCodeIsSuccessTest()
+        public async Task GetLatestExchangeRatesWhenStatusCodeIsSuccessTest()
         {
-            var httpClient = ForeignExchangeRatesHttpClient.HttpClient;
-            var foreignExchangeRatesService = new ForeignExchangeRatesService(httpClient);
+            var client = ForeignExchangeRatesHttpClient.HttpClient;
+            var service = new ForeignExchangeRatesService(client);
 
-            var result = await foreignExchangeRatesService.GetLatestExchangeRateAsync(Currency.USD);
+            var result = await service.GetLatestExchangeRateAsync(Currency.USD);
 
             Assert.IsType<ForeignExchangeRatesResponse>(result);
         }
