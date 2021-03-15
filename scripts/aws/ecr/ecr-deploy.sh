@@ -3,4 +3,3 @@
 aws cloudformation create-stack \
   --stack-name exchange-rate-repository \
   --template-body file://erc.yml
-
