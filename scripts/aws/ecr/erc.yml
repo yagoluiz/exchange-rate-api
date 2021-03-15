@@ -1,0 +1,11 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: A private repository stack for deploying image in AWS ECR.
+  This stack creates a private repository.
+Resources:
+
+  ECR: 
+    Type: AWS::ECR::Repository
+    Properties: 
+      RepositoryName: 'exchange-rate-api'
+      ImageScanningConfiguration: 
+        ScanOnPush: 'true'
