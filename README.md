@@ -1,5 +1,7 @@
 # Exchange Rate API
 
+![](https://github.com/yagoluiz/exchange-rate-api/workflows/Docker%20Image%20CI/badge.svg)
+
 API responsible for making foreign currency quotes for BRL (Brazilian Real).
 
 ## Project Structure
