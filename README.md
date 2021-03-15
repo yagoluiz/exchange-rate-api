@@ -1,10 +1,10 @@
 # Exchange Rate API
 
-API Responsible for making foreign currency quotes for BRL (Brazilian Real).
+API responsible for making foreign currency quotes for BRL (Brazilian Real).
 
 ## Project Structure
 
-The project uses the MVC layered pattern as a focus on domain definition.
+The project uses the MVC layered pattern.
 
 - Project folder structure:
 
@@ -41,10 +41,18 @@ docker-compose up -d
 
 ### .NET CLI
 
+- Run project
+
 ```bash
 src/Exchange.Rate.API
 
 dotnet watch run
+```
+
+- Run tests
+
+```bash
+dotnet test -t
 ```
 
 ## Endpoints
@@ -64,7 +72,7 @@ For more information visit swagger: *http://localhost:5000/swagger/index.html*
 
 ## Deploy
 
-###  AWS arquitecture reference
+### AWS arquitecture reference
 
 ![](https://raw.githubusercontent.com/thombergs/code-examples/master/aws/cloudformation/ecs-in-two-public-subnets/ecs-in-two-public-subnets.svg)
 
@@ -75,6 +83,12 @@ Step by step to manual deploy using **AWS CloudFormation**:
 1. Create Docker image repository
 
 This project uses the AWS ECR (Docker Container Registry) as a Docker image repository. Other repositories can be used, such as the Docker Hub.
+
+- Execute docker-compose file:
+
+```bash
+docker-compose up -d
+```
 
 Enter the folder *scripts/aws/ecr* and run the scripts:
 
