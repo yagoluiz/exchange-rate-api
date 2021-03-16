@@ -133,10 +133,6 @@ The deployment of this project via AWS CloudFormation was based on the following
 - *https://reflectoring.io/aws-cloudformation-deploy-docker-image/*
 - *https://github.com/thombergs/code-examples/tree/master/aws/cloudformation/ecs-in-two-public-subnets*
 
-## Production
-
-Temporary production URL: *http://excha-publi-1ttmc87sz15x2-415172047.us-east-1.elb.amazonaws.com/swagger/index.html*
-
 ## Improvements
 
 - [ ] Cache for Foreign Exchange Rates API
