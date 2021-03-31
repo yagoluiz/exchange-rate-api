@@ -133,9 +133,16 @@ The deployment of this project via AWS CloudFormation was based on the following
 - *https://reflectoring.io/aws-cloudformation-deploy-docker-image/*
 - *https://github.com/thombergs/code-examples/tree/master/aws/cloudformation/ecs-in-two-public-subnets*
 
-## Improvements
+### Delete deploy
 
-- [ ] Cache for Foreign Exchange Rates API
-- [ ] HealthChecks to the Foreign Exchange Rates API
-- [ ] Code coverage for project testes
-- [ ] CloudWatch service on CloudFormation
+```bash
+aws cloudformation delete-stack \
+  --stack-name exchange-rate-api-service 
+```
+
+Run delete stack service step only when the status is completed: **CREATE_COMPLETE**.
+
+```bash
+aws cloudformation delete-stack \
+  --stack-name exchange-rate-api-network 
+```
