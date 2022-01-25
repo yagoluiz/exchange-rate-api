@@ -4,33 +4,6 @@
 
 API responsible for making foreign currency quotes for BRL (Brazilian Real).
 
-## Project Structure
-
-The project uses the MVC layered pattern.
-
-- Project folder structure:
-
-```
-├── scripts
-  ├── aws (deploy)
-├── src 
-  ├── Exchange.Rate.API (project)
-  ├── Exchange.Rate.Domain (project)
-  ├── Exchange.Rate.Infra (project)
-├── test
-  ├── Exchange.Rate.Integration.Tests (project)
-  ├── Exchange.Rate.Unit.Tests (project)
-├── Exchange.Rate (solution)
-```
-
-- Design layers pattern:
-
-1. **Exchange.Rate.API**: responsible for the API endpoint availability layer
-2. **Exchange.Rate.Domain**: application domain responsible for maintaining business rules
-3. **Exchange.Rate.Infra**: for data access and external services
-4. **Exchange.Rate.Integration.Tests**: responsible for the integration test layer of the projects
-5. **Exchange.Rate.Unit.Tests**: responsible for the unit test layer of the projects
-
 ## Instructions for run project
 
 Run project via Docker, via Visual Studio (F5 or CTRL + F5), Visual Studio Code (tasks project) or CLI.
